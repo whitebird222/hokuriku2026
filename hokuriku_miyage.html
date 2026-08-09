@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#7b1e2b">
+<title>北陸旅行｜お土産チェックリスト</title>
+<style>
+:root{--accent:#7b1e2b;--gold:#b58b3b;--bg:#f7f5f1;--card:#fff;--text:#272522;--muted:#777;--line:#e7e1d8}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",Meiryo,sans-serif;line-height:1.55}
+header{background:linear-gradient(135deg,#7b1e2b,#4c1420);color:#fff;padding:28px 18px 20px;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #0002}
+header h1{font-size:22px;margin:0 0 5px}
+header p{margin:0;font-size:13px;opacity:.9}
+.progress{margin-top:14px;background:#ffffff33;border-radius:99px;height:8px;overflow:hidden}
+.progress>div{height:100%;width:0;background:#f1d48c;transition:.25s}
+.wrap{max-width:760px;margin:auto;padding:14px}
+.nav{display:flex;gap:8px;overflow:auto;padding:4px 0 12px;position:sticky;top:112px;z-index:5;background:var(--bg)}
+.nav a{flex:0 0 auto;text-decoration:none;color:var(--accent);background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:12px}
+.summary{background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;margin:6px 0 16px}
+.summary b{font-size:15px}
+.summary .stats{display:flex;gap:8px;margin-top:10px}
+.stat{flex:1;background:#f5f1e9;border-radius:12px;padding:9px;text-align:center}
+.stat strong{display:block;font-size:20px;color:var(--accent)}
+.section{scroll-margin-top:170px;margin:24px 0}
+.section h2{font-size:19px;margin:0 0 8px;display:flex;align-items:center;gap:7px}
+.section-note{font-size:12px;color:var(--muted);margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 2px 8px #00000008}
+.card.best{border:2px solid var(--gold)}
+.photo{height:145px;background:#eee;position:relative;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo .fallback{height:100%;display:flex;align-items:center;justify-content:center;font-size:42px;background:linear-gradient(135deg,#f4eee4,#e8ddd0)}
+.badge{position:absolute;top:8px;left:8px;background:var(--accent);color:#fff;border-radius:999px;padding:4px 8px;font-size:10px;font-weight:700}
+.badge.gold{background:var(--gold)}
+.body{padding:11px}
+.title{font-weight:800;font-size:15px;margin-bottom:4px}
+.desc{font-size:11px;color:#666;min-height:34px}
+.meta{display:flex;flex-wrap:wrap;gap:5px;margin:8px 0}
+.tag{font-size:10px;border-radius:999px;background:#f2eee7;padding:4px 7px}
+.rating{color:#b58b3b;letter-spacing:1px;font-size:12px}
+.check{display:flex;align-items:center;gap:8px;border-top:1px solid var(--line);padding-top:9px;margin-top:9px;font-size:12px;font-weight:700}
+.check input{width:20px;height:20px;accent-color:var(--accent)}
+.card.done{opacity:.62}
+.card.done .title{text-decoration:line-through}
+.source{font-size:10px;color:#8a7a6a;margin-top:8px}
+.source a{color:#7b1e2b}
+footer{padding:28px 4px 60px;color:#888;font-size:10px}
+@media(max-width:420px){.grid{grid-template-columns:1fr}.photo{height:190px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🎁 北陸旅行｜お土産チェックリスト</h1>
+  <p>2026/10/9〜10/12｜金沢 → 高岡 → 五箇山 → 富山</p>
+  <div class="progress"><div id="bar"></div></div>
+</header>
+
+<div class="wrap">
+  <div class="nav">
+    <a href="#kanazawa">金沢</a><a href="#takaoka">高岡</a><a href="#gokayama">五箇山</a><a href="#toyama">富山</a><a href="#final">最終候補</a>
+  </div>
+
+  <div class="summary">
+    <b>旅行中は「買ったらチェック」</b>
+    <div class="stats">
+      <div class="stat"><strong id="done">0</strong>購入済み</div>
+      <div class="stat"><strong id="total">0</strong>候補</div>
+      <div class="stat"><strong id="remain">0</strong>残り</div>
+    </div>
+  </div>
+
+  <section class="section" id="kanazawa">
+    <h2>🟣 金沢｜10月10日</h2>
+    <p class="section-note">コンクールの空き時間・ひがし茶屋街・金沢駅周辺で購入。紙ふうせんは最優先候補。</p>
+    <div class="grid">
+      <article class="card best" data-id="kamifuusen">
+        <div class="photo"><img src="https://shopping.jtb.co.jp/item/990005495/" alt="紙ふうせん" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none">🎈</div><span class="badge gold">BEST BUY</span></div>
+        <div class="body"><div class="title">紙ふうせん｜菓匠 高木屋</div><div class="desc">丸い最中の中に和風ゼリー。見た目が華やかで金沢らしい。</div><div class="meta"><span class="tag">奥様・自宅</span><span class="tag">職場にも◎</span><span class="tag">常温</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://takagiya.base.ec/items/32240247">商品情報</a></div></div>
+      </article>
+
+      <article class="card" data-id="kintsuba">
+        <div class="photo"><img src="https://cdn-ak.f.st-hatena.com/images/fotolife/o/otonano_ensoku/20200921/20200921210153.jpg" alt="中田屋きんつば"><div class="fallback">🍵</div></div>
+        <div class="body"><div class="title">きんつば｜中田屋</div><div class="desc">大納言小豆を使った金沢の定番和菓子。</div><div class="meta"><span class="tag">職場</span><span class="tag">自宅</span><span class="tag">常温</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://www.kintuba.co.jp/">公式</a></div></div>
+      </article>
+
+      <article class="card" data-id="kagaboucha">
+        <div class="photo"><img src="https://s.otoriyose.net/upload/item/44/00004424/b138acbaa5d83a2.jpg?ts=1462845978" alt="献上加賀棒茶"><div class="fallback">🍵</div></div>
+        <div class="body"><div class="title">献上加賀棒茶</div><div class="desc">茎を焙じた香ばしい加賀棒茶。軽くて日持ちする。</div><div class="meta"><span class="tag">自宅</span><span class="tag">職場</span><span class="tag">軽い</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://kagaboucha.com/">丸八製茶場</a></div></div>
+      </article>
+
+      <article class="card" data-id="rakugan">
+        <div class="photo"><div class="fallback">🌸</div></div>
+        <div class="body"><div class="title">落雁・和三盆菓子</div><div class="desc">茶道文化の金沢らしさを感じる上品な和菓子。</div><div class="meta"><span class="tag">自宅</span><span class="tag">軽い</span><span class="tag">日持ち</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+
+      <article class="card" data-id="kinpaku">
+        <div class="photo"><div class="fallback">✨</div></div>
+        <div class="body"><div class="title">金箔スイーツ</div><div class="desc">金箔カステラ・チョコ・ラスクなど。ひがし茶屋街で探す。</div><div class="meta"><span class="tag">奥様</span><span class="tag">金沢らしい</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+
+      <article class="card" data-id="kanazawacurry">
+        <div class="photo"><div class="fallback">🍛</div></div>
+        <div class="body"><div class="title">金沢カレー（レトルト）</div><div class="desc">自宅で旅行後に食べられるB級グルメ系土産。</div><div class="meta"><span class="tag">自宅</span><span class="tag">常温</span></div><div class="rating">★★★☆☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="takaoka">
+    <h2>🟤 高岡｜10月10〜11日</h2>
+    <p class="section-note">高岡では「食べ物」より、旅の記念になる鋳物を1点選ぶのがおすすめ。</p>
+    <div class="grid">
+      <article class="card best" data-id="nousaku">
+        <div class="photo"><img src="https://shop.gakubun.net/item/560415_n05/" alt="能作 錫タンブラー" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none">🥃</div><span class="badge gold">旅の記念</span></div>
+        <div class="body"><div class="title">能作｜錫のタンブラー・酒器</div><div class="desc">高岡の鋳物文化を持ち帰れる、長く使えるお土産。</div><div class="meta"><span class="tag">夫婦の記念</span><span class="tag">工芸品</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://www.nousaku.co.jp/product/">能作 公式</a></div></div>
+      </article>
+
+      <article class="card" data-id="takaoka-small">
+        <div class="photo"><div class="fallback">🔔</div></div>
+        <div class="body"><div class="title">高岡銅器・真鍮の小物</div><div class="desc">箸置き、ベル、オブジェなど。荷物になりにくい小型品も候補。</div><div class="meta"><span class="tag">記念品</span><span class="tag">軽め</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://www.nousaku.co.jp/shop/shop/factoryshop/factoryshop/">能作 FACTORY SHOP</a></div></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="gokayama">
+    <h2>🟢 五箇山｜10月11日</h2>
+    <p class="section-note">相倉集落で「その土地らしい食」を少量買う。生ものは持ち帰り条件を確認。</p>
+    <div class="grid">
+      <article class="card" data-id="gokayama-soba">
+        <div class="photo"><div class="fallback">🥢</div></div>
+        <div class="body"><div class="title">五箇山そば</div><div class="desc">乾麺なら持ち帰りやすく、帰宅後も五箇山気分を楽しめる。</div><div class="meta"><span class="tag">自宅</span><span class="tag">軽い</span><span class="tag">常温</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+
+      <article class="card" data-id="gokayama-tofu">
+        <div class="photo"><div class="fallback">🍽️</div></div>
+        <div class="body"><div class="title">五箇山豆腐</div><div class="desc">現地で食べるのを第一候補に。持ち帰り品は保冷条件を確認。</div><div class="meta"><span class="tag">現地</span><span class="tag">要保冷</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://gokayama-info.jp/en/archives/276">五箇山観光情報</a></div></div>
+      </article>
+
+      <article class="card" data-id="gokayama-okaki">
+        <div class="photo"><div class="fallback">🍘</div></div>
+        <div class="body"><div class="title">かきもち・あられ</div><div class="desc">軽くて日持ちしやすい、職場にも配りやすい候補。</div><div class="meta"><span class="tag">職場</span><span class="tag">軽い</span><span class="tag">日持ち</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="toyama">
+    <h2>🔵 富山｜10月11〜12日</h2>
+    <p class="section-note">食のお土産が強いエリア。生ものは10月12日にまとめて購入するのが安全。</p>
+    <div class="grid">
+      <article class="card best" data-id="shiroebi">
+        <div class="photo"><img src="https://aeonshop.com/products/detail/5904891322218" alt="しろえび紀行" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="fallback" style="display:none">🦐</div><span class="badge gold">職場 BEST</span></div>
+        <div class="body"><div class="title">しろえび紀行</div><div class="desc">富山湾の白えびを使った薄焼きせんべい。個包装で配りやすい。</div><div class="meta"><span class="tag">職場</span><span class="tag">軽い</span><span class="tag">日持ち</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://www.sasaraya-kakibei.com/shopdetail/000000000079/">ささら屋</a></div></div>
+      </article>
+
+      <article class="card best" data-id="masuzushi">
+        <div class="photo"><img src="https://www.info-toyama.com/storage/tourism_attractions/102878/responsive_images/yXGNHEzqNh5KCz2SIvduAaW6RZTD7Ucx116n7Ntw__1200_1200.jpeg" alt="ます寿し"><div class="fallback" style="display:none">🐟</div><span class="badge gold">自宅 BEST</span></div>
+        <div class="body"><div class="title">ます寿し</div><div class="desc">富山土産の王道。購入は帰路直前がベター。</div><div class="meta"><span class="tag">自宅</span><span class="tag">要保冷</span><span class="tag">最終日</span></div><div class="rating">★★★★★</div><label class="check"><input type="checkbox"> 買った</label><div class="source"><a href="https://www.info-toyama.com/attractions/102878">商品例・観光情報</a></div></div>
+      </article>
+
+      <article class="card" data-id="kombu">
+        <div class="photo"><div class="fallback">🌿</div></div>
+        <div class="body"><div class="title">とろろ昆布・昆布加工品</div><div class="desc">軽くて日持ちする富山らしい食品土産。自宅用に便利。</div><div class="meta"><span class="tag">自宅</span><span class="tag">軽い</span><span class="tag">日持ち</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+
+      <article class="card" data-id="kamaboko">
+        <div class="photo"><div class="fallback">🐟</div></div>
+        <div class="body"><div class="title">昆布巻きかまぼこ</div><div class="desc">富山らしさが出る一品。持ち帰りは保冷条件を確認。</div><div class="meta"><span class="tag">自宅</span><span class="tag">要保冷</span><span class="tag">最終日</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+
+      <article class="card" data-id="sake">
+        <div class="photo"><div class="fallback">🍶</div></div>
+        <div class="body"><div class="title">富山の地酒</div><div class="desc">立山・羽根屋・満寿泉など。夫婦で旅の余韻を楽しむ用。</div><div class="meta"><span class="tag">夫婦</span><span class="tag">自宅</span></div><div class="rating">★★★★☆</div><label class="check"><input type="checkbox"> 買った</label></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="final">
+    <h2>⭐ 最終的な「買うならこれ」</h2>
+    <p class="section-note">荷物を増やしすぎないなら、この5つを優先。</p>
+    <div class="summary">
+      <ol style="margin:0;padding-left:22px">
+        <li><b>紙ふうせん</b> — 金沢の華やかな銘菓</li>
+        <li><b>献上加賀棒茶</b> — 軽くて自宅用にも◎</li>
+        <li><b>能作の錫製品</b> — 高岡の旅の記念</li>
+        <li><b>しろえび紀行</b> — 職場用の本命</li>
+        <li><b>ます寿し</b> — 富山の自宅用本命</li>
+      </ol>
+    </div>
+  </section>
+
+  <footer>
+    写真は商品・販売ページ等で公開されている画像を参照しています。商品価格、季節商品、販売場所、賞味期限、在庫は2026年10月の旅行時点で変わる可能性があります。購入前に各販売元の最新情報をご確認ください。<br><br>
+    チェック状態はこの端末のブラウザに保存されます。
+  </footer>
+</div>
+
+<script>
+const cards=[...document.querySelectorAll('.card')];
+const key='hokuriku-omiyage-check-v1';
+let saved={};
+try{saved=JSON.parse(localStorage.getItem(key)||'{}')}catch(e){}
+function update(){
+  let done=0;
+  cards.forEach(c=>{
+    const id=c.dataset.id, cb=c.querySelector('input[type=checkbox]');
+    cb.checked=!!saved[id];
+    c.classList.toggle('done',cb.checked);
+    if(cb.checked)done++;
+    cb.onchange=()=>{saved[id]=cb.checked;localStorage.setItem(key,JSON.stringify(saved));update()}
+  });
+  document.getElementById('total').textContent=cards.length;
+  document.getElementById('done').textContent=done;
+  document.getElementById('remain').textContent=cards.length-done;
+  document.getElementById('bar').style.width=(done/cards.length*100)+'%';
+}
+update();
+</script>
+</body>
+</html>
