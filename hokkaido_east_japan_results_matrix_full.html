@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北海道代表校 東日本学校吹奏楽大会 成績(直近5年)</title>
+<style>
+  body {
+    margin: 0;
+    padding: 16px 12px 24px;
+    background: #FFFFFF;
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    color: #0B0B0B;
+  }
+  h1 {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 4px;
+  }
+  p.sub {
+    font-size: 12px;
+    color: #52514E;
+    margin: 0 0 16px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12px;
+  }
+  th, td {
+    border: 0.5px solid #D9D8D2;
+    padding: 6px 4px;
+    text-align: center;
+  }
+  th {
+    background: #F1EFE8;
+    font-weight: 500;
+    color: #52514E;
+  }
+  td.name {
+    text-align: left;
+    padding: 6px 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  tr:nth-child(even) td {
+    background: #FAFAF8;
+  }
+  .pill {
+    display: inline-block;
+    width: 18px;
+    height: 16px;
+    border-radius: 3px;
+  }
+  .legend {
+    display: flex;
+    gap: 14px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: #52514E;
+  }
+  .legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .legend .pill {
+    width: 14px;
+    height: 12px;
+  }
+  .note {
+    font-size: 11px;
+    color: #898781;
+    margin-top: 16px;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+
+<h1>北海道代表校 東日本学校吹奏楽大会 成績</h1>
+<p class="sub">中学校の部・直近5年間(2021〜2025年)</p>
+
+<table>
+<colgroup>
+<col style="width: 44%;">
+<col style="width: 11.2%;"><col style="width: 11.2%;"><col style="width: 11.2%;"><col style="width: 11.2%;"><col style="width: 11.2%;">
+</colgroup>
+<thead>
+<tr>
+<th style="text-align: left; padding: 6px 6px;">学校名</th>
+<th>21</th><th>22</th><th>23</th><th>24</th><th>25</th>
+</tr>
+</thead>
+<tbody id="tbody"></tbody>
+</table>
+
+<div class="legend">
+<span><span class="pill" style="background: #FAC775;"></span>金賞</span>
+<span><span class="pill" style="background: #B4B2A9;"></span>銀賞</span>
+<span><span class="pill" style="background: #F0997B;"></span>銅賞</span>
+</div>
+
+<p class="note">出典: suisougaku-net.com(東日本学校吹奏楽大会 結果アーカイブ)。列の数字は西暦の下2桁(21=2021年など)。</p>
+
+<script>
+const years = [21,22,23,24,25];
+const rows = [
+{n:"旭川市立旭川中学校", r:{21:"銀",22:"金",24:"金",25:"銀"}},
+{n:"上富良野町立上富良野中学校", r:{24:"銅",25:"金"}},
+{n:"札幌市立米里中学校", r:{23:"金",25:"銀"}},
+{n:"東川町立東川中学校", r:{23:"銀",24:"銀"}},
+{n:"札幌市立清田中学校", r:{23:"銀",24:"金"}},
+{n:"札幌市立啓明中学校", r:{22:"銀",23:"銀"}},
+{n:"美幌町立北中学校", r:{21:"金",23:"金"}},
+{n:"札幌市立新琴似北中学校", r:{21:"銅",22:"銅"}},
+{n:"札幌市立白石中学校", r:{25:"銅"}},
+{n:"旭川市立神居東中学校", r:{25:"銀"}},
+{n:"小清水町立小清水中学校", r:{24:"銀"}},
+{n:"遠軽町立南中学校", r:{22:"銀"}},
+{n:"函館市立青柳中学校", r:{22:"金"}},
+{n:"札幌市立屯田中央中学校", r:{21:"金"}},
+{n:"札幌市立中央中学校", r:{21:"金"}}
+];
+const medalColor = {"金":"#FAC775","銀":"#B4B2A9","銅":"#F0997B"};
+
+const tbody = document.getElementById('tbody');
+let html = '';
+rows.forEach((row) => {
+  html += '<tr>';
+  html += '<td class="name">' + row.n + '</td>';
+  years.forEach(y => {
+    const m = row.r[y];
+    html += '<td>';
+    if (m) {
+      html += '<span class="pill" style="background:' + medalColor[m] + ';" title="' + m + '賞"></span>';
+    }
+    html += '</td>';
+  });
+  html += '</tr>';
+});
+tbody.innerHTML = html;
+</script>
+
+</body>
+</html>
