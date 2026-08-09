@@ -1,1 +1,0 @@
-# shizen-quiz-images
