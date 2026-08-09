@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>北陸ひとり旅 日程表（10/9-10/12）</title>
+<style>
+  :root {
+    --bg: #faf7f2;
+    --card: #ffffff;
+    --ink: #2b2620;
+    --sub: #6b6357;
+    --line: #e8e0d3;
+    --accent: #b5541f;
+    --accent-bg: #fbeee3;
+    --note-bg: #fff7e0;
+    --note-line: #e8cf8a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1a17;
+      --card: #26231f;
+      --ink: #f0ece3;
+      --sub: #b8ae9c;
+      --line: #3a352c;
+      --accent: #e0894f;
+      --accent-bg: #3a2a1e;
+      --note-bg: #362c14;
+      --note-line: #6b5a26;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 0 0 3rem;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", sans-serif;
+    line-height: 1.7;
+    font-size: 16px;
+  }
+  header.top {
+    padding: 1.5rem 1.25rem 1.25rem;
+    background: var(--accent-bg);
+    border-bottom: 1px solid var(--line);
+  }
+  header.top h1 {
+    margin: 0 0 0.25rem;
+    font-size: 20px;
+    font-weight: 700;
+  }
+  header.top p {
+    margin: 0;
+    color: var(--sub);
+    font-size: 14px;
+  }
+  nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0.75rem 1.25rem;
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    border-bottom: 1px solid var(--line);
+    z-index: 10;
+    -webkit-overflow-scrolling: touch;
+  }
+  nav a {
+    flex: 0 0 auto;
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    background: var(--card);
+    white-space: nowrap;
+  }
+  main {
+    padding: 1.25rem;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  section.day {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 1.25rem;
+    scroll-margin-top: 60px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+  }
+  .banner {
+    width: 100%;
+    display: block;
+    aspect-ratio: 5 / 2;
+  }
+  .day-body { padding: 1.1rem 1.25rem 1.25rem; }
+  section.day h2 {
+    margin: 0 0 2px;
+    font-size: 17px;
+    font-weight: 700;
+  }
+  section.day .subtitle {
+    color: var(--accent);
+    font-size: 13px;
+    font-weight: 600;
+    margin: 0 0 0.5rem;
+  }
+  .blurb {
+    font-size: 13.5px;
+    color: var(--sub);
+    margin: 0 0 0.9rem;
+    font-family: Georgia, "Hiragino Mincho ProN", serif;
+    font-style: italic;
+    line-height: 1.65;
+  }
+  ul.timeline {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  ul.timeline li {
+    display: grid;
+    grid-template-columns: 68px 1fr;
+    gap: 10px;
+    padding: 7px 0;
+    border-top: 1px solid var(--line);
+    font-size: 14.5px;
+  }
+  ul.timeline li:first-child { border-top: none; }
+  .time {
+    color: var(--sub);
+    font-size: 12.5px;
+    font-weight: 600;
+    padding-top: 1px;
+  }
+  .note {
+    margin-top: 0.9rem;
+    background: var(--note-bg);
+    border: 1px solid var(--note-line);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    font-size: 13.5px;
+  }
+  .note b { display: block; margin-bottom: 3px; font-size: 12.5px; }
+  footer.summary {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 1.1rem 1.25rem;
+    margin-top: 0.5rem;
+    max-width: 640px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  footer.summary h2 { font-size: 16px; margin: 0 0 0.6rem; }
+  footer.summary ul { margin: 0; padding-left: 1.1rem; font-size: 13.5px; color: var(--sub); }
+  footer.summary li { margin-bottom: 6px; }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <h1>北陸ひとり旅 日程表</h1>
+  <p>2026年10月9日（金）〜12日（月） / 石川・富山</p>
+</header>
+
+<nav>
+  <a href="#day1">9日 金沢入り</a>
+  <a href="#day2">10日 コンクール</a>
+  <a href="#day3">11日 五箇山</a>
+  <a href="#day4">12日 富山→帰路</a>
+</nav>
+
+<main>
+
+  <section class="day" id="day1">
+    <svg class="banner" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2b3a67"/>
+          <stop offset="60%" stop-color="#4a5a8f"/>
+          <stop offset="100%" stop-color="#8a7aa8"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="200" fill="url(#sky1)"/>
+      <circle cx="90" cy="45" r="22" fill="#fef3d0" opacity="0.9"/>
+      <circle cx="150" cy="30" r="2" fill="#fff"/>
+      <circle cx="220" cy="55" r="1.6" fill="#fff"/>
+      <circle cx="300" cy="25" r="2" fill="#fff"/>
+      <circle cx="380" cy="40" r="1.6" fill="#fff"/>
+      <circle cx="430" cy="65" r="2" fill="#fff"/>
+      <path d="M40 175 L120 130 L160 138 L170 128 L200 135 L150 165 L165 172 L145 178 L110 168 L40 185 Z" fill="#e9ecf5"/>
+      <path d="M240 150 Q320 110 470 150 L470 165 Q320 130 240 165 Z" fill="#1c2440" opacity="0.55"/>
+      <path d="M20 195 Q250 175 480 195 L480 200 L20 200 Z" fill="#181c33"/>
+    </svg>
+    <div class="day-body">
+      <h2>10月9日（金）</h2>
+      <p class="subtitle">移動日・金沢泊</p>
+      <p class="blurb">放課後、夜空へ飛び立つところから旅がはじまる。小松空港に着く頃には、金沢の夜がひっそりと迎えてくれる。</p>
+      <ul class="timeline">
+        <li><div class="time">15:00</div><div>職場を出発</div></li>
+        <li><div class="time">16:00頃</div><div>空港駐車場に到着（職場から約40分）</div></li>
+        <li><div class="time">16:30頃</div><div>新千歳空港ターミナル到着（駐車場から約30分）</div></li>
+        <li><div class="time">17:25</div><div>新千歳発 NH74（羽田行き）</div></li>
+        <li><div class="time">19:05</div><div>羽田空港 第2ターミナル着</div></li>
+        <li><div class="time">20:35</div><div>羽田発 NH759（小松行き・同じ第2ターミナルなのでターミナル移動なし）</div></li>
+        <li><div class="time">21:35</div><div>小松空港着</div></li>
+        <li><div class="time">21:54</div><div>リムジンバスで金沢駅へ（所要42分）</div></li>
+        <li><div class="time">22:36</div><div>金沢駅着。夜は軽めの食事で済ませ、金沢名物は翌日に</div></li>
+        <li><div class="time">23:00頃</div><div>東横INN金沢兼六園香林坊へ（金沢駅からバス約10分＋徒歩1分、または深夜帯はタクシーが確実）</div></li>
+        <li><div class="time">23:30</div><div>チェックイン予定時刻</div></li>
+      </ul>
+      <div class="note">
+        <b>搭乗情報</b>
+        予約番号 FDGX2H／NH74・NH759（ANA）／受託手荷物1個（1PC）。羽田は往復とも第2ターミナル発着。
+      </div>
+      <div class="note">
+        <b>宿泊情報</b>
+        東横INN金沢兼六園香林坊（石川県金沢市香林坊2-4-28／TEL 076-232-1045）。予約番号6304672、禁煙シングル1名、7,100円（税・宿泊税込、オンライン決済済み）。ホテルの無料送迎バスは金沢駅西口発21:00が最終のため、23時頃の到着では利用不可。バス（香林坊下車、徒歩1分）かタクシーで向かう。
+      </div>
+    </div>
+  </section>
+
+  <section class="day" id="day2">
+    <svg class="banner" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#f6c453"/>
+          <stop offset="100%" stop-color="#e8843a"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="200" fill="url(#sky2)"/>
+      <circle cx="420" cy="45" r="30" fill="#fff6e0" opacity="0.85"/>
+      <ellipse cx="120" cy="45" rx="14" ry="14" fill="#c94a2f"/>
+      <ellipse cx="145" cy="55" rx="12" ry="12" fill="#e0692f"/>
+      <ellipse cx="95" cy="60" rx="11" ry="11" fill="#e0692f"/>
+      <path d="M0 200 L0 150 Q250 120 500 150 L500 200 Z" fill="#3f6b4f"/>
+      <rect x="225" y="95" width="10" height="55" fill="#7a6a52"/>
+      <path d="M195 95 L235 60 L270 95 Z" fill="#8f7d63"/>
+      <rect x="215" y="95" width="45" height="10" fill="#8f7d63"/>
+      <path d="M210 60 L235 30 L235 60 Z" fill="#a08d70"/>
+      <path d="M235 60 L260 60 L235 30 Z" fill="#8f7d63"/>
+      <circle cx="55" cy="150" r="16" fill="#fdebc8"/>
+      <path d="M45 150 Q55 120 65 150 Z" fill="#f2b23c"/>
+      <rect x="52" y="150" width="6" height="16" fill="#c98a2f"/>
+    </svg>
+    <div class="day-body">
+      <h2>10月10日（土）</h2>
+      <p class="subtitle">金沢歌劇座でコンクール鑑賞・夜に高岡へ移動</p>
+      <p class="blurb">朝いちばんの兼六園は、ほとんど貸切り。娘の晴れ舞台を見届けたら、金箔きらめく茶屋街で一日を締めくくる。</p>
+      <ul class="timeline">
+        <li><div class="time">5:00-6:45</div><div>兼六園 早朝無料開放を散策</div></li>
+        <li><div class="time">日中</div><div>金沢歌劇座で東日本吹奏楽コンクール鑑賞（本多町、兼六園・金沢城公園から徒歩圏）</div></li>
+        <li><div class="time">ランチ</div><div>妻と合流。「香りん寿司」（海鮮丼）または「アイビス」（金沢城公園ビュー）</div></li>
+        <li><div class="time">空き時間</div><div>金沢城公園を散策</div></li>
+        <li><div class="time">空き時間</div><div>ひがし茶屋街：金箔アイスは必須。金箔体験（かなざわ美かざりあさの／箔一 076-240-8911）は予約優先、時間が読めなければ当日空き確認</div></li>
+        <li><div class="time">夜</div><div>金沢名物の夕食：「加賀屋 金沢店」または「黒百合」（金沢百番街あんと内、治部煮など）</div></li>
+        <li><div class="time">食後</div><div>あいの風とやま鉄道で高岡へ（約30〜40分）</div></li>
+        <li><div class="time">夜</div><div>高岡着・高岡泊</div></li>
+      </ul>
+      <div class="note">
+        <b>注意</b>
+        金沢→高岡の最終電車を事前に確認しておく。夕食は20時台に店を出られるくらいの余裕を見ておくと安心。逃した場合はタクシー（目安1万円弱）。
+      </div>
+    </div>
+  </section>
+
+  <section class="day" id="day3">
+    <svg class="banner" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#bcd9c7"/>
+          <stop offset="100%" stop-color="#7fae87"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="200" fill="url(#sky3)"/>
+      <path d="M0 130 L80 60 L150 130 Z" fill="#5c8465" opacity="0.7"/>
+      <path d="M120 140 L230 45 L330 140 Z" fill="#4c7355" opacity="0.8"/>
+      <path d="M300 140 L400 70 L500 140 L500 140 Z" fill="#5c8465" opacity="0.7"/>
+      <rect x="0" y="140" width="500" height="60" fill="#e9e2c9"/>
+      <g>
+        <rect x="70" y="150" width="55" height="35" fill="#efe6cf"/>
+        <path d="M60 150 L97 108 L134 150 Z" fill="#9c8259"/>
+        <path d="M60 150 L134 150 L134 158 L60 158 Z" fill="#7a6641"/>
+      </g>
+      <g>
+        <rect x="180" y="145" width="70" height="42" fill="#f2ead4"/>
+        <path d="M168 145 L215 95 L262 145 Z" fill="#8a7148"/>
+        <path d="M168 145 L262 145 L262 154 L168 154 Z" fill="#6b5836"/>
+      </g>
+      <g>
+        <rect x="320" y="152" width="52" height="33" fill="#efe6cf"/>
+        <path d="M311 152 L346 112 L381 152 Z" fill="#9c8259"/>
+        <path d="M311 152 L381 152 L381 160 L311 160 Z" fill="#7a6641"/>
+      </g>
+    </svg>
+    <div class="day-body">
+      <h2>10月11日（日）</h2>
+      <p class="subtitle">高岡・五箇山めぐり・富山泊</p>
+      <p class="blurb">山あいに佇む合掌造りの村へ。高岡の大仏さまに見送られ、五箇山の澄んだ空気の中を歩く一日。</p>
+      <ul class="timeline">
+        <li><div class="time">朝</div><div>高岡のホテルをチェックアウト。荷物は高岡駅のコインロッカーへ（大・中・小あり、使用は3日以内）</div></li>
+        <li><div class="time">08:10</div><div>世界遺産バス 高岡駅前発（加越能バス、予約不要）</div></li>
+        <li><div class="time">09:28</div><div>相倉口着。相倉集落（五箇山）を散策</div></li>
+        <li><div class="time">ランチ</div><div>徒歩1分の「道の駅たいら」内「五箇山の味 ふるさと」で五箇山豆腐・そば・岩魚・山菜</div></li>
+        <li><div class="time">12:30</div><div>相倉口発バス（14:35発・15:30発・16:45発もあり、余裕を持ちたければこちらで）</div></li>
+        <li><div class="time">13:55</div><div>高岡駅前着</div></li>
+        <li><div class="time">14:00頃</div><div>南口から徒歩10分、国宝・瑞龍寺を拝観（30〜40分）</div></li>
+        <li><div class="time">14:45頃</div><div>駅に戻り、北口から徒歩10分、高岡大仏へ</div></li>
+        <li><div class="time">15:30頃</div><div>高岡駅で荷物を回収</div></li>
+        <li><div class="time">16時台</div><div>あいの風とやま鉄道で富山へ（約20〜25分）</div></li>
+        <li><div class="time">夜</div><div>富山着・富山泊。夕食は「白えび亭」「銀兆鮨」「常葉」など（要予約）</div></li>
+        <li><div class="time">食後</div><div>富岩運河環水公園へ。天門橋のライトアップは日没〜22時（毎時0/20/40分から5分間の演出）、スタバは22:30まで営業</div></li>
+      </ul>
+      <div class="note">
+        <b>目安</b>
+        08:10発が早ければ09:35発（相倉口10:53着）でも十分。相倉滞在を長めにしたい場合は帰りを14:35発以降にずらす。
+      </div>
+    </div>
+  </section>
+
+  <section class="day" id="day4">
+    <svg class="banner" viewBox="0 0 500 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="sky4" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#bfe3ea"/>
+          <stop offset="100%" stop-color="#5fa9bb"/>
+        </linearGradient>
+      </defs>
+      <rect width="500" height="200" fill="url(#sky4)"/>
+      <rect x="0" y="150" width="500" height="50" fill="#3f7f92"/>
+      <path d="M110 150 Q250 60 390 150" fill="none" stroke="#f4f6f0" stroke-width="8"/>
+      <path d="M110 150 Q250 60 390 150" fill="none" stroke="#dfe4da" stroke-width="3"/>
+      <rect x="103" y="140" width="10" height="45" fill="#eceee7"/>
+      <rect x="387" y="140" width="10" height="45" fill="#eceee7"/>
+      <g>
+        <rect x="40" y="70" width="34" height="40" rx="3" fill="#2f6b3f"/>
+        <rect x="46" y="60" width="22" height="14" rx="2" fill="#2f6b3f"/>
+        <path d="M46 60 Q57 48 68 60" fill="none" stroke="#2f6b3f" stroke-width="4"/>
+      </g>
+      <g>
+        <ellipse cx="430" cy="115" rx="26" ry="10" fill="#f4efe3"/>
+        <path d="M406 115 Q412 95 430 95 Q448 95 454 115 Z" fill="#e8dcc4"/>
+        <path d="M406 115 Q430 128 454 115" fill="none" stroke="#c9b78e" stroke-width="2"/>
+      </g>
+    </svg>
+    <div class="day-body">
+      <h2>10月12日（月）</h2>
+      <p class="subtitle">富山観光からの帰路</p>
+      <p class="blurb">環水公園の朝の光とコーヒーの香り、仕上げはブラックラーメン。最後まで富山を味わい尽くしてから空へ。</p>
+      <ul class="timeline">
+        <li><div class="time">9:00頃</div><div>ホテルをチェックアウト</div></li>
+        <li><div class="time">午前</div><div>富岩運河環水公園で「世界一美しいスタバ」（8:00-22:30）</div></li>
+        <li><div class="time">午前</div><div>西町大喜「とやマルシェ店」でブラックラーメン（10:00開店・年中無休）</div></li>
+        <li><div class="time">11:20頃</div><div>空港連絡バスで富山空港へ（富山駅⇔空港420円）</div></li>
+        <li><div class="time">12:45</div><div>富山空港発</div></li>
+        <li><div class="time">14:10</div><div>新千歳空港着</div></li>
+      </ul>
+      <div class="note">
+        <b>注意</b>
+        駅前店の西町大喜は月曜定休なのでとやマルシェ店へ。富山-新千歳は1日1便のため、余裕を持って空港へ。
+      </div>
+    </div>
+  </section>
+
+  <footer class="summary">
+    <h2>持ち物・確認リスト</h2>
+    <ul>
+      <li>金沢→高岡の最終電車の時刻（9/10当日までに確認）</li>
+      <li>金箔体験の予約・空き状況（箔一 076-240-8911）</li>
+      <li>10/11夕食の予約（白えび亭・銀兆鮨・常葉など）</li>
+      <li>高岡駅コインロッカーの空き（大・中・小、使用は3日以内）</li>
+      <li>富山空港12:45発の搭乗時刻・最新ダイヤの確認</li>
+    </ul>
+  </footer>
+
+</main>
+
+</body>
+</html>
