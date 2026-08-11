@@ -71,7 +71,7 @@ footer{padding:28px 4px 60px;color:#888;font-size:10px}
 
 <div class="wrap">
   <div class="nav">
-    <a href="#kanazawa">金沢</a><a href="#takaoka">高岡</a><a href="#gokayama">五箇山</a><a href="#toyama">富山</a><a href="#final">最終候補</a>
+    <a href="#kanazawa">金沢</a><a href="#takaoka">高岡</a><a href="#gokayama">五箇山</a><a href="#toyama">富山</a><a href="#final">最終候補</a><a href="#bought">買ったリスト</a>
   </div>
 
   <div class="summary">
@@ -345,6 +345,15 @@ footer{padding:28px 4px 60px;color:#888;font-size:10px}
     </div>
   </section>
 
+  <section class="section" id="bought">
+    <h2>🛍️ 買ったものリスト</h2>
+    <div class="summary">
+      <p id="boughtEmpty" class="section-note" style="margin:0">まだ何も買っていません。買ったらチェックすると、ここに増えていきます。</p>
+      <ul id="boughtItems" style="margin:0;padding-left:20px;display:none"></ul>
+      <div id="boughtTotal" class="section-note" style="margin:10px 0 0;display:none"></div>
+    </div>
+  </section>
+
   <footer>
     写真は商品・販売ページ等で公開されている画像を参照しています。価格は2026年8月時点で確認できた情報を基準にした目安で、季節商品・在庫・営業時間とともに10月の旅行時点で変わる可能性があります。地図はGoogle Maps検索です。購入前に各販売元の最新情報をご確認ください。<br><br>
     優先度・購入状態はこの端末のブラウザに保存されます。
@@ -361,6 +370,7 @@ function save(){
 }
 function update(){
   let done=0, skip=0;
+  const boughtList=[];
   cards.forEach(c=>{
     const id=c.dataset.id;
     const defaultP=c.dataset.defaultPriority||'undecided';
@@ -375,7 +385,13 @@ function update(){
     const isSkip = st.p==='skip';
     c.classList.toggle('done', !!st.b);
     c.classList.toggle('mini', isSkip);
-    if(st.b) done++;
+    if(st.b){
+      done++;
+      boughtList.push({
+        title:c.querySelector('.title').textContent,
+        price:c.querySelector('.price').textContent
+      });
+    }
     if(isSkip) skip++;
     cb.onchange=()=>{
       saved[id].b=cb.checked;
@@ -391,6 +407,27 @@ function update(){
   document.getElementById('remain').textContent=cards.length-done-skip;
   const denom=cards.length-skip;
   document.getElementById('bar').style.width=(denom>0?(done/denom*100):0)+'%';
+
+  const boughtEmpty=document.getElementById('boughtEmpty');
+  const boughtItems=document.getElementById('boughtItems');
+  const boughtTotal=document.getElementById('boughtTotal');
+  boughtItems.innerHTML='';
+  if(boughtList.length===0){
+    boughtEmpty.style.display='block';
+    boughtItems.style.display='none';
+    boughtTotal.style.display='none';
+  }else{
+    boughtEmpty.style.display='none';
+    boughtItems.style.display='block';
+    boughtTotal.style.display='block';
+    boughtList.forEach(item=>{
+      const li=document.createElement('li');
+      li.style.marginBottom='5px';
+      li.innerHTML='<b>'+item.title+'</b>　'+item.price;
+      boughtItems.appendChild(li);
+    });
+    boughtTotal.textContent='合計 '+boughtList.length+' 点 購入済み';
+  }
 }
 update();
 </script>
