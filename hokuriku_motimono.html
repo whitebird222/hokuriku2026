@@ -14,6 +14,10 @@
     --accent: #b5541f;
     --accent-bg: #fbeee3;
     --done: #7fae87;
+    --bp: #4a7ba6;
+    --bp-bg: #e4eef6;
+    --sc: #8a6a3c;
+    --sc-bg: #f3ead8;
   }
   @media (prefers-color-scheme: dark) {
     :root {
@@ -25,6 +29,10 @@
       --accent: #e0894f;
       --accent-bg: #3a2a1e;
       --done: #8fc79a;
+      --bp: #8fbde0;
+      --bp-bg: #26374a;
+      --sc: #d8b985;
+      --sc-bg: #3c2f1c;
     }
   }
   * { box-sizing: border-box; }
@@ -38,7 +46,7 @@
     font-size: 16px;
   }
   header {
-    padding: 1.5rem 1.25rem 1.1rem;
+    padding: 1.25rem 1.25rem 1rem;
     background: var(--accent-bg);
     border-bottom: 1px solid var(--line);
     position: sticky;
@@ -46,15 +54,14 @@
     z-index: 10;
   }
   header h1 {
-    margin: 0 0 4px;
-    font-size: 19px;
+    margin: 0 0 8px;
+    font-size: 18px;
     font-weight: 700;
   }
   .progress-row {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 8px;
   }
   .progress-bar {
     flex: 1;
@@ -75,6 +82,27 @@
     white-space: nowrap;
     font-weight: 600;
   }
+  .toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .toolbar button {
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    border-radius: 999px;
+    padding: 5px 12px;
+    font-size: 12.5px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .toolbar button.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
   main {
     padding: 1.25rem;
     max-width: 560px;
@@ -92,6 +120,11 @@
     margin: 0 0 0.6rem;
     font-weight: 700;
   }
+  section.category .subcount {
+    font-weight: 400;
+    color: var(--sub);
+    font-size: 12.5px;
+  }
   ul.items {
     list-style: none;
     margin: 0 0 0.7rem;
@@ -100,9 +133,10 @@
   ul.items li {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     padding: 7px 0;
     border-top: 1px solid var(--line);
+    flex-wrap: wrap;
   }
   ul.items li:first-child { border-top: none; }
   ul.items li input[type="checkbox"] {
@@ -113,18 +147,37 @@
   }
   ul.items li label {
     flex: 1;
+    min-width: 90px;
     font-size: 14.5px;
+  }
+  ul.items li .catlabel {
+    font-size: 11.5px;
+    color: var(--sub);
+    display: block;
   }
   ul.items li.checked label {
     color: var(--sub);
     text-decoration: line-through;
   }
+  .bagbtns { display: flex; gap: 4px; }
+  .bagbtn {
+    border: 1px solid var(--line);
+    background: var(--bg);
+    color: var(--sub);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .bagbtn.on-bp { background: var(--bp-bg); border-color: var(--bp); color: var(--bp); }
+  .bagbtn.on-sc { background: var(--sc-bg); border-color: var(--sc); color: var(--sc); }
   ul.items li .del {
     border: none;
     background: none;
     color: var(--sub);
     font-size: 16px;
-    padding: 2px 6px;
+    padding: 2px 4px;
     cursor: pointer;
     line-height: 1;
   }
@@ -153,6 +206,11 @@
     cursor: pointer;
     white-space: nowrap;
   }
+  .empty-hint {
+    font-size: 13px;
+    color: var(--sub);
+    padding: 4px 0 10px;
+  }
   .reset-row {
     max-width: 560px;
     margin: 0.5rem auto 0;
@@ -166,6 +224,10 @@
     font-size: 12.5px;
     text-decoration: underline;
     cursor: pointer;
+    margin: 0 6px;
+  }
+  @media print {
+    header .toolbar, .add-row, .del, .reset-row, .bagbtns { display: none; }
   }
 </style>
 </head>
@@ -177,6 +239,12 @@
     <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
     <div class="progress-label" id="progressLabel">0/0</div>
   </div>
+  <div class="toolbar" id="viewToolbar">
+    <button data-view="cat" type="button">カテゴリ別</button>
+    <button data-view="bag" type="button">かばん別</button>
+    <button data-filter="toggle" type="button" id="filterBtn">未完了のみ</button>
+    <button type="button" id="printBtn">印刷用に表示</button>
+  </div>
 </header>
 
 <main id="main"></main>
@@ -186,37 +254,57 @@
 </div>
 
 <script>
-  var STORAGE_KEY = "hokuriku_packing_v1";
+  var STORAGE_KEY = "hokuriku_packing_v2";
 
   var defaultData = [
     { cat: "書類・カード類", items: [
       "eチケット控え",
-      "身分証明書",
-      "東横INN予約確認",
-      "交通系ICカード",
-      "現金",
-      "クレジットカード"
+      "財布",
+      "チケット（コンクール）",
+      "ホテル確認書類"
     ]},
     { cat: "服装", items: [
-      "長袖トップス",
-      "羽織り（カーディガン・ライトダウンなど）",
-      "折りたたみ傘 または レインコート",
-      "履き慣れた靴",
-      "コンサート鑑賞用の服"
+      "ナイトウェア",
+      "Tシャツ・ポロ ×2",
+      "長袖 ×1",
+      "ズボン ×1",
+      "靴下 ×3",
+      "パンツ ×3",
+      "インナー ×3",
+      "セットアップスーツ",
+      "折り畳み傘"
+    ]},
+    { cat: "洗面・身だしなみ", items: [
+      "コンタクト",
+      "メガネ",
+      "シェーバー",
+      "整髪料",
+      "スキンケア",
+      "常備薬"
     ]},
     { cat: "電子機器", items: [
       "スマホ充電器",
-      "モバイルバッテリー"
-    ]},
-    { cat: "荷造り", items: [
-      "サブバッグ（リュック・トートなど）"
+      "モバイルバッテリー",
+      "イヤホン"
     ]},
     { cat: "その他", items: [
-      "常備薬",
-      "リップクリーム",
-      "双眼鏡",
+      "ティッシュ",
+      "ウェットティッシュ",
+      "ビニール袋",
       "エコバッグ"
     ]}
+  ];
+
+  var MIGRATIONS = [
+    { id: "m1-2026-08-remove-add", run: function (st) {
+      var removeTexts = ["双眼鏡", "クレジットカード", "東横INN予約確認", "交通系ICカード", "現金", "履き慣れた靴", "充電ケーブル", "身分証明書"];
+      st = st.filter(function (it) { return removeTexts.indexOf(it.text) === -1; });
+      var hasHotelDoc = st.some(function (it) { return it.text === "ホテル確認書類"; });
+      if (!hasHotelDoc) {
+        st.push({ id: "i" + Date.now() + Math.floor(Math.random() * 1000), cat: "書類・カード類", text: "ホテル確認書類", checked: false, bag: null });
+      }
+      return st;
+    }}
   ];
 
   function buildDefaultState() {
@@ -224,7 +312,7 @@
     var idCounter = 1;
     defaultData.forEach(function (group) {
       group.items.forEach(function (text) {
-        state.push({ id: "i" + (idCounter++), cat: group.cat, text: text, checked: false });
+        state.push({ id: "i" + (idCounter++), cat: group.cat, text: text, checked: false, bag: null });
       });
     });
     return state;
@@ -233,16 +321,39 @@
   function loadState() {
     var raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      try { return JSON.parse(raw); } catch (e) {}
+      try {
+        var parsed = JSON.parse(raw);
+        parsed.forEach(function (it) { if (typeof it.bag === "undefined") it.bag = null; });
+        return parsed;
+      } catch (e) {}
     }
     return buildDefaultState();
   }
 
-  function saveState(state) {
+  function saveState() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
   }
 
-  var state = loadState();
+  var MIGRATIONS_KEY = "hokuriku_packing_migrations";
+  function applyMigrations(st) {
+    var applied = [];
+    try { applied = JSON.parse(localStorage.getItem(MIGRATIONS_KEY) || "[]"); } catch (e) {}
+    var changed = false;
+    MIGRATIONS.forEach(function (m) {
+      if (applied.indexOf(m.id) === -1) {
+        st = m.run(st);
+        applied.push(m.id);
+        changed = true;
+      }
+    });
+    if (changed) localStorage.setItem(MIGRATIONS_KEY, JSON.stringify(applied));
+    return st;
+  }
+
+  var state = applyMigrations(loadState());
+  saveState();
+  var view = "cat";
+  var hideChecked = false;
 
   function categoriesInOrder() {
     var order = [];
@@ -253,61 +364,102 @@
     return order;
   }
 
-  function render() {
+  function makeItemLi(it, showCatLabel) {
+    var li = document.createElement("li");
+    if (it.checked) li.className = "checked";
+
+    var cb = document.createElement("input");
+    cb.type = "checkbox";
+    cb.id = it.id;
+    cb.checked = it.checked;
+    cb.addEventListener("change", function () {
+      it.checked = cb.checked;
+      saveState();
+      render();
+    });
+
+    var label = document.createElement("label");
+    label.setAttribute("for", it.id);
+    if (showCatLabel) {
+      label.innerHTML = it.text + '<span class="catlabel">' + it.cat + "</span>";
+    } else {
+      label.textContent = it.text;
+    }
+
+    var bagWrap = document.createElement("div");
+    bagWrap.className = "bagbtns";
+
+    var bpBtn = document.createElement("button");
+    bpBtn.type = "button";
+    bpBtn.className = "bagbtn" + (it.bag === "backpack" ? " on-bp" : "");
+    bpBtn.textContent = "リュック";
+    bpBtn.addEventListener("click", function () {
+      it.bag = it.bag === "backpack" ? null : "backpack";
+      saveState();
+      render();
+    });
+
+    var scBtn = document.createElement("button");
+    scBtn.type = "button";
+    scBtn.className = "bagbtn" + (it.bag === "suitcase" ? " on-sc" : "");
+    scBtn.textContent = "スーツケース";
+    scBtn.addEventListener("click", function () {
+      it.bag = it.bag === "suitcase" ? null : "suitcase";
+      saveState();
+      render();
+    });
+
+    bagWrap.appendChild(bpBtn);
+    bagWrap.appendChild(scBtn);
+
+    var del = document.createElement("button");
+    del.className = "del";
+    del.type = "button";
+    del.textContent = "×";
+    del.setAttribute("aria-label", "削除");
+    del.addEventListener("click", function () {
+      state = state.filter(function (s) { return s.id !== it.id; });
+      saveState();
+      render();
+    });
+
+    li.appendChild(cb);
+    li.appendChild(label);
+    li.appendChild(bagWrap);
+    li.appendChild(del);
+    return li;
+  }
+
+  function renderByCategory() {
     var main = document.getElementById("main");
-    main.innerHTML = "";
     var cats = categoriesInOrder();
 
     cats.forEach(function (cat) {
-      var catItems = state.filter(function (it) { return it.cat === cat; });
-      if (catItems.length === 0) return;
+      var catItems = state.filter(function (it) {
+        return it.cat === cat && (!hideChecked || !it.checked);
+      });
+      var allCatItems = state.filter(function (it) { return it.cat === cat; });
+      if (allCatItems.length === 0) return;
 
       var section = document.createElement("section");
       section.className = "category";
 
       var h2 = document.createElement("h2");
-      h2.textContent = cat;
+      var doneCount = allCatItems.filter(function (i) { return i.checked; }).length;
+      h2.innerHTML = cat + ' <span class="subcount">(' + doneCount + "/" + allCatItems.length + ")</span>";
       section.appendChild(h2);
 
       var ul = document.createElement("ul");
       ul.className = "items";
-
-      catItems.forEach(function (it) {
-        var li = document.createElement("li");
-        if (it.checked) li.className = "checked";
-
-        var cb = document.createElement("input");
-        cb.type = "checkbox";
-        cb.id = it.id;
-        cb.checked = it.checked;
-        cb.addEventListener("change", function () {
-          it.checked = cb.checked;
-          saveState(state);
-          render();
-        });
-
-        var label = document.createElement("label");
-        label.setAttribute("for", it.id);
-        label.textContent = it.text;
-
-        var del = document.createElement("button");
-        del.className = "del";
-        del.type = "button";
-        del.textContent = "×";
-        del.setAttribute("aria-label", "削除");
-        del.addEventListener("click", function () {
-          state = state.filter(function (s) { return s.id !== it.id; });
-          saveState(state);
-          render();
-        });
-
-        li.appendChild(cb);
-        li.appendChild(label);
-        li.appendChild(del);
-        ul.appendChild(li);
-      });
-
-      section.appendChild(ul);
+      if (catItems.length === 0) {
+        var hint = document.createElement("div");
+        hint.className = "empty-hint";
+        hint.textContent = "すべて完了しています";
+        section.appendChild(hint);
+      } else {
+        catItems.forEach(function (it) { ul.appendChild(makeItemLi(it, false)); });
+        section.appendChild(ul);
+      }
 
       var addRow = document.createElement("div");
       addRow.className = "add-row";
@@ -321,15 +473,13 @@
       function addItem() {
         var val = input.value.trim();
         if (!val) return;
-        state.push({ id: "i" + Date.now() + Math.floor(Math.random() * 1000), cat: cat, text: val, checked: false });
-        saveState(state);
+        state.push({ id: "i" + Date.now() + Math.floor(Math.random() * 1000), cat: cat, text: val, checked: false, bag: null });
+        saveState();
         input.value = "";
         render();
       }
       btn.addEventListener("click", addItem);
-      input.addEventListener("keydown", function (e) {
-        if (e.key === "Enter") addItem();
-      });
+      input.addEventListener("keydown", function (e) { if (e.key === "Enter") addItem(); });
 
       addRow.appendChild(input);
       addRow.appendChild(btn);
@@ -337,17 +487,82 @@
 
       main.appendChild(section);
     });
+  }
+
+  function renderByBag() {
+    var main = document.getElementById("main");
+    var groups = [
+      { key: "backpack", title: "リュック" },
+      { key: "suitcase", title: "スーツケース" },
+      { key: null, title: "まだ振り分けていない" }
+    ];
+
+    groups.forEach(function (g) {
+      var items = state.filter(function (it) {
+        return it.bag === g.key && (!hideChecked || !it.checked);
+      });
+      var allItems = state.filter(function (it) { return it.bag === g.key; });
+      if (allItems.length === 0) return;
+
+      var section = document.createElement("section");
+      section.className = "category";
+      var h2 = document.createElement("h2");
+      var doneCount = allItems.filter(function (i) { return i.checked; }).length;
+      h2.innerHTML = g.title + ' <span class="subcount">(' + doneCount + "/" + allItems.length + ")</span>";
+      section.appendChild(h2);
+
+      if (items.length === 0) {
+        var hint = document.createElement("div");
+        hint.className = "empty-hint";
+        hint.textContent = "すべて完了しています";
+        section.appendChild(hint);
+      } else {
+        var ul = document.createElement("ul");
+        ul.className = "items";
+        items.forEach(function (it) { ul.appendChild(makeItemLi(it, true)); });
+        section.appendChild(ul);
+      }
+      main.appendChild(section);
+    });
+  }
+
+  function render() {
+    var main = document.getElementById("main");
+    main.innerHTML = "";
+    if (view === "cat") renderByCategory(); else renderByBag();
 
     var total = state.length;
     var done = state.filter(function (it) { return it.checked; }).length;
     document.getElementById("progressLabel").textContent = done + "/" + total;
     document.getElementById("progressFill").style.width = total ? Math.round((done / total) * 100) + "%" : "0%";
+
+    var toolbarBtns = document.querySelectorAll("#viewToolbar button[data-view]");
+    toolbarBtns.forEach(function (b) {
+      b.className = b.getAttribute("data-view") === view ? "active" : "";
+    });
+    document.getElementById("filterBtn").className = hideChecked ? "active" : "";
   }
 
+  document.querySelectorAll("#viewToolbar button[data-view]").forEach(function (b) {
+    b.addEventListener("click", function () {
+      view = b.getAttribute("data-view");
+      render();
+    });
+  });
+
+  document.getElementById("filterBtn").addEventListener("click", function () {
+    hideChecked = !hideChecked;
+    render();
+  });
+
+  document.getElementById("printBtn").addEventListener("click", function () {
+    window.print();
+  });
+
   document.getElementById("resetBtn").addEventListener("click", function () {
-    if (confirm("チェック状態と追加した項目をリセットして、初期リストに戻しますか？")) {
+    if (confirm("チェック状態・振り分け・追加した項目をリセットして、初期リストに戻しますか？")) {
       state = buildDefaultState();
-      saveState(state);
+      saveState();
       render();
     }
   });
